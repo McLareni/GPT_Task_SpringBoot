@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: Contact API
+  version: 1.0.0
+  description: API для роботи з контактами
+
+paths:
+  /contacts:
+    get:
+      summary: Отримати всі контакти
+      responses:
+        '200':
+          description: Список контактів
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+
+    post:
+      summary: Створити новий контакт
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactDTO'
+      responses:
+        '201':
+          description: Контакт створено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: Неправильні дані
+
+  /contacts/{id}:
+    get:
+      summary: Отримати контакт за ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Контакт знайдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '404':
+          description: Контакт не знайдено
+
+    put:
+      summary: Оновити контакт за ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactDTO'
+      responses:
+        '200':
+          description: Контакт оновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+
+    delete:
+      summary: Видалити контакт за ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Контакт видалено
+
+  /contacts/search:
+    get:
+      summary: Пошук контактів за ім’ям
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Частина імені для пошуку
+          required: false
+      responses:
+        '200':
+          description: Список знайдених контактів
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+
+components:
+  schemas:
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
