@@ -1,0 +1,45 @@
+# IDE / Editor files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Maven / Gradle build directories
+/target/
+/build/
+
+# Логи
+*.log
+
+# Файли налаштувань локального оточення
+*.properties
+*.yml
+!src/main/resources/application.properties
+!src/main/resources/application.yml
+
+# Файли бази даних, якщо вони локальні
+*.h2.db
+*.mv.db
+
+# Кеші та тимчасові файли
+*.class
+*.jar
+*.war
+*.ear
+*.dll
+*.exe
+*.so
+*.dylib
+
+# Профілі налаштувань середовища (наприклад, для запуску локально)
+/.env
+/.env.local
+
+# Spring Boot DevTools (якщо використовується)
+spring-boot-devtools.properties
+
+# Підпапки для кешів і temp
+tmp/
+.cache/
+out/
